@@ -25,23 +25,23 @@ import pymongo
 import datetime
 
 #Variables that contains the user credentials to access Twitter API 
-access_token = "2919297428-mmSl83hhvpwKq4bE1qRhxBQrChc8WefiXu267T2"
-access_token_secret = "rySilFWltSa2qEqvJPJk1UGdKSS28FkJgkCv4TqGlsf0u"
-consumer_key = "XcgYrEvIpZjKrcTYWSAAPiQdN"
-consumer_secret = "c56AzAIMX2by91gqh4an1LEmQxohyiLehlJASqqDAVxrXVMdRP"
+access_token = ""
+access_token_secret = ""
+consumer_key = ""
+consumer_secret = ""
 
 tweets_data = []
 
 # Preprocess the extracted tweets to be predicted by the model
 def preprocess(tweets_data):
-    count_vectorizer = joblib.load('/home/abhishek/Trend-Analyzer/data/vectorizer.pkl')		# when running with crontab use absolute path
+    count_vectorizer = joblib.load('../data/vectorizer.pkl')		# when running with crontab use absolute path
     tweets_data = count_vectorizer.transform(tweets_data)
     tfidf_tweet = TfidfTransformer(use_idf=False).transform(tweets_data)		# Tf-idf matrix for tweets
     return tfidf_tweet
 
 # learning the naive bayes classifier to classify the data
 def predict_sentiment(tweets_data):
-    classifier = joblib.load('/home/abhishek/Trend-Analyzer/data/Naive_Bayes.pkl')			# when running with crontab use absolute path
+    classifier = joblib.load('../data/Naive_Bayes.pkl')			# when running with crontab use absolute path
     predicted_tweets = classifier.predict(tweets_data)
     return predicted_tweets
 
