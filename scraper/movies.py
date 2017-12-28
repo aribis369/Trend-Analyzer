@@ -100,4 +100,3 @@ def upcoming_movies():
 
 
 upcoming_movies()
-
